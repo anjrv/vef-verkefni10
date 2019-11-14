@@ -38,3 +38,24 @@ export function el(name, ...children) {
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+/**
+ * Random legal date
+ */
+export function randomDate() {
+  let month;
+  let day;
+
+  const year = randomNumber(2016, new Date().getFullYear());
+  if (year === new Date().getFullYear()) {
+    month = randomNumber(1, (new Date().getMonth() + 1));
+  } else {
+    month = randomNumber(1, 12);
+  }
+  if (year === new Date().getFullYear() && month === new Date().getMonth() + 1) {
+    day = randomNumber(1, new Date().getDate());
+  } else {
+    day = randomNumber(1, 29);
+  }
+  return `${String(year)}-${String(month)}-${String(day)}`;
+}

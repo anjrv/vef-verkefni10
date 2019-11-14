@@ -1,3 +1,4 @@
+import { el, empty } from './helpers';
 /**
  * Sækir og vistar í localStorage
  */
@@ -29,7 +30,6 @@ export function load() {
 export function save(type, mediaUrl, text, title) {
 
 }
-
 
 /**
  * Hreinsar allar myndir úr localStorage
