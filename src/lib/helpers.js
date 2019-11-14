@@ -40,22 +40,34 @@ export function randomNumber(min, max) {
 }
 
 /**
- * Random legal date
+ * Skilar dagsetningu af handahófi
  */
 export function randomDate() {
   let month;
   let day;
 
-  const year = randomNumber(2016, new Date().getFullYear());
+  const year = randomNumber(1995, new Date().getFullYear());
   if (year === new Date().getFullYear()) {
     month = randomNumber(1, (new Date().getMonth() + 1));
+  } else if (year === 1995) {
+    month = randomNumber(6, 12);
   } else {
     month = randomNumber(1, 12);
   }
   if (year === new Date().getFullYear() && month === new Date().getMonth() + 1) {
     day = randomNumber(1, new Date().getDate());
+  } else if (year === 1995 && month === 6) {
+    day = randomNumber(16, 30);
+  } else if (month === 2) {
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+      day = randomNumber(1, 29);
+    } else {
+      day = randomNumber(1, 28);
+    }
+  } else if (month === 4 || month === 6 || month === 9 || month === 11) {
+    day = randomNumber(1, 30);
   } else {
-    day = randomNumber(1, 29);
+    day = randomNumber(1, 31);
   }
   return `${String(year)}-${String(month)}-${String(day)}`;
 }
