@@ -16,7 +16,9 @@ const LOCALSTORAGE_KEY = 'favourite_spacephotos';
  * @returns {array} fylki af myndum eða tóma fylkið ef ekkert vistað.
  */
 export function load() {
-
+  const data = JSON.parse(localStorage.getItem('favourite_spacephotos'));
+  console.log(data);
+  return data;
 }
 
 /**

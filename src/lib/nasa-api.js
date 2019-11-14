@@ -16,10 +16,10 @@ const URL = 'https://api.nasa.gov/planetary/apod';
  */
 export default async function getRandomImage() {
   const date = randomDate();
-  try {
-    await fetch(`${URL}?api_key=${API_KEY}&date=${date}`);
+  try { // 2018-03-18 url date for a video value
+    const response = await fetch(`${URL}?api_key=${API_KEY}&date=${date}`);
+    return response;
   } catch (err) {
     console.error(err);
   }
-  return fetch(`${URL}?api_key=${API_KEY}&date=${date}`);
 }

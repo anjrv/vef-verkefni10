@@ -59,7 +59,7 @@ export function randomDate() {
   } else if (year === 1995 && month === 6) {
     day = randomNumber(16, 30);
   } else if (month === 2) {
-    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+    if (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)) {
       day = randomNumber(1, 29);
     } else {
       day = randomNumber(1, 28);

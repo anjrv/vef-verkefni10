@@ -9,6 +9,7 @@ let title; // titill fyrir mynd á forsíðu
 let text; // texti fyrir mynd á forsíðu
 let img; // mynd á forsíðu
 let image; // object sem inniheldur núverandi mynd á forsíðu.
+const itemsArray = [];
 
 /*
  * Sækir nýja Mynd af handahófi frá Nasa API og birtir hana á forsíðunni
@@ -23,21 +24,30 @@ function getNewImage() {
     return response.json();
   })
     .then((data) => {
-      console.log(data);
+      if (document.contains(document.getElementById('vidElement'))) {
+        document.getElementById('vidElement').remove();
+      }
 
-      img = data.hdurl;
-      document.querySelector('.apod__image').src = img;
-
+      const type = data.media_type;
+      img = data.url;
+      if (type === 'video') {
+        const apod = document.querySelector('.apod');
+        const video = document.createElement('iframe');
+        video.id = 'vidElement';
+        video.width = 560;
+        video.height = 315;
+        video.src = img;
+        apod.insertBefore(video, apod.firstChild);
+      } else {
+        document.querySelector('.apod__image').src = img;
+      }
       title = data.title;
       document.querySelector('.apod__title').innerHTML = title;
 
       text = data.explanation;
       document.querySelector('.apod__text').innerHTML = text;
 
-      image = [title, text, img];
-    })
-    .catch((error) => {
-      console.log(error);
+      image = [type, title, text, img];
     });
 }
 
@@ -45,7 +55,8 @@ function getNewImage() {
  * Vistar núverandi mynd í storage.
  */
 function saveCurrentImage() {
-  console.log('Saving!');
+  itemsArray.push(image);
+  localStorage.setItem('favourite_spacephotos', JSON.stringify(itemsArray));
 }
 
 /*
@@ -67,5 +78,6 @@ export default function init(apod) {
  * titlum þeirra.
  */
 export function loadFavourites() {
-
+  const data = load();
+  console.log(data);
 }
