@@ -40,7 +40,7 @@ export function randomNumber(min, max) {
 }
 
 /**
- * Skilar dagsetningu af handahófi
+ * Skilar dagsetningu milli 16-6-1995 og núverandi af handahófi
  */
 export function randomDate() {
   let month;

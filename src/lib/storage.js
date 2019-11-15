@@ -1,7 +1,4 @@
 import { empty } from './helpers';
-/**
- * Sækir og vistar í localStorage
- */
 
 // Fast sem skilgreinir heiti á lykli sem vistað er undir í localStorage
 const LOCALSTORAGE_KEY = 'favourite_spacephotos';
@@ -21,7 +18,7 @@ export function load() {
 }
 
 /**
- * Hreinsar allar myndir úr localStorage
+ * Hreinsar allar myndir úr favourites siðunni og tæmir localStorage
  */
 export function clear() {
   localStorage.removeItem(LOCALSTORAGE_KEY);

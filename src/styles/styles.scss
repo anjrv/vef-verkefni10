@@ -35,6 +35,7 @@ h1 { /* stylelint-disable-line */
 // layout
 header { /* stylelint-disable-line */
   display: flex;
+  margin-bottom: 20px;
   flex-direction: column;
   align-items: center;
 }
@@ -46,6 +47,13 @@ main { /* stylelint-disable-line */
   margin: 0 auto;
 
   flex-direction: column;
+}
+
+footer { /* stylelint-disable-line */
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  align-items: center;
 }
 
 @import "text";

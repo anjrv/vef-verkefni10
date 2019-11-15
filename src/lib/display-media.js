@@ -2,17 +2,16 @@ import getRandomImage from './nasa-api';
 import { el } from './helpers';
 import { load } from './storage';
 
-// todo vísa í rétta hluti með import
-
 // breytur til þess að halda utan um html element nodes
 let title; // titill fyrir mynd á forsíðu
 let text; // texti fyrir mynd á forsíðu
 let img; // mynd á forsíðu
 let image; // object sem inniheldur núverandi mynd á forsíðu.
-const itemsArray = JSON.parse(localStorage.getItem('favourite_spacephotos')) || []; // inniheldur þær upplýsingar sem eru í localstorage
+// inniheldur þær upplýsingar sem eru í localstorage
+const itemsArray = JSON.parse(localStorage.getItem('favourite_spacephotos')) || [];
 
 /**
- * Býr til responsive video embed
+ * Býr til responsive video
  * @param {} src video source
  */
 function displayVideo(src) {
@@ -21,10 +20,11 @@ function displayVideo(src) {
 
   const vidContainer = document.createElement('div');
   vidContainer.id = 'vid-container';
+  vidContainer.style.position = 'relative';
+  // 16:9 aspect ratio
   vidContainer.style.height = '56.25vh';
   vidContainer.style.width = '100%';
-  vidContainer.style.position = 'relative';
-  
+
   const video = document.createElement('iframe');
   video.id = 'vid';
   video.style.width = '100%';
