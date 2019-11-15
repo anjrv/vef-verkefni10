@@ -37,4 +37,8 @@ Notast var við `Astronomy Picture of the Day` Apann
 
 ## Sett fyrir
 
+<<<<<<< HEAD
 Verkefni sett fyrir í  miðvikudaginn 13. nóvember 2019.
+=======
+Verkefni sett fyrir í  miðvikudaginn 13. nóvember 2019.
+>>>>>>> a64fb161a3ad5c33e6a06ed7ac4c0b09463f7d6b

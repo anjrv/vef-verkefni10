@@ -18,13 +18,13 @@ const itemsArray = JSON.parse(localStorage.getItem('favourite_spacephotos')) || 
 function displayVideo(src) {
   const apods = document.getElementsByClassName('apod');
   const apod = apods[apods.length - 1];
-  const vidContainer = document.createElement('div');
 
+  const vidContainer = document.createElement('div');
   vidContainer.id = 'vid-container';
   vidContainer.style.height = '56.25vh';
   vidContainer.style.width = '100%';
   vidContainer.style.position = 'relative';
-
+  
   const video = document.createElement('iframe');
   video.id = 'vid';
   video.style.width = '100%';
