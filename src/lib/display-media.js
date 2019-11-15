@@ -9,7 +9,7 @@ let title; // titill fyrir mynd á forsíðu
 let text; // texti fyrir mynd á forsíðu
 let img; // mynd á forsíðu
 let image; // object sem inniheldur núverandi mynd á forsíðu.
-const itemsArray = [];
+const itemsArray = JSON.parse(localStorage.getItem('favourite_spacephotos')) || [];
 
 /*
  * Sækir nýja Mynd af handahófi frá Nasa API og birtir hana á forsíðunni
@@ -82,8 +82,24 @@ export function loadFavourites() {
   const loc = document.getElementsByTagName('main');
 
   images.forEach((image) => {
-    console.log(image);
+    if (image.type === 'video') {
     const component = el('section',
+      el('h2'),
+      el('iframe'),
+    );
+    component.className = 'apod';
+    component.firstChild.className = 'apod__title';
+    const title = component.querySelector('.apod__title');
+    title.innerHTML = image.title;
+    component.lastChild.className = 'apod__video';
+    const media = component.querySelector('.apod__video');
+    media.id = 'vidElement';
+    media.width = 560;
+    media.height = 315;
+    media.src = image.mediaUrl;
+    loc[0].appendChild(component);
+    } else {
+      const component = el('section',
       el('h2'),
       el('img'),
     );
@@ -95,5 +111,6 @@ export function loadFavourites() {
     const media = component.querySelector('.apod__image');
     media.src = image.mediaUrl;
     loc[0].appendChild(component);
+    }
   });
 }
