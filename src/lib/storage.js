@@ -1,4 +1,3 @@
-import { el, empty } from './helpers';
 /**
  * Sækir og vistar í localStorage
  */
@@ -17,20 +16,7 @@ const LOCALSTORAGE_KEY = 'favourite_spacephotos';
  */
 export function load() {
   const data = JSON.parse(localStorage.getItem('favourite_spacephotos'));
-  console.log(data);
   return data;
-}
-
-/**
- * Vistaðar myndir með texta.
- *
- * @param {string} type annað hvort image eða video
- * @param {string} mediaUrl URL á myndinni/myndbandinu.
- * @param {string} text texti fyrir myndina/myndbandið.
- * @param {string} title titill fyrir myndina/myndbandið.
- */
-export function save(type, mediaUrl, text, title) {
-
 }
 
 /**

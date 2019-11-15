@@ -1,6 +1,6 @@
 import getRandomImage from './nasa-api';
-import { el, empty } from './helpers';
-import { load, save, clear } from './storage';
+import { el } from './helpers';
+import { load } from './storage';
 
 // todo vísa í rétta hluti með import
 
@@ -9,7 +9,34 @@ let title; // titill fyrir mynd á forsíðu
 let text; // texti fyrir mynd á forsíðu
 let img; // mynd á forsíðu
 let image; // object sem inniheldur núverandi mynd á forsíðu.
-const itemsArray = JSON.parse(localStorage.getItem('favourite_spacephotos')) || [];
+const itemsArray = JSON.parse(localStorage.getItem('favourite_spacephotos')) || []; // inniheldur þær upplýsingar sem eru í localstorage
+
+/**
+ * Býr til responsive video embed
+ * @param {} src video source
+ */
+function displayVideo(src) {
+  const apods = document.getElementsByClassName('apod');
+  const apod = apods[apods.length - 1];
+  const vidContainer = document.createElement('div');
+
+  vidContainer.id = 'vid-container';
+  vidContainer.style.height = '56.25vh';
+  vidContainer.style.width = '100%';
+  vidContainer.style.position = 'relative';
+
+  const video = document.createElement('iframe');
+  video.id = 'vid';
+  video.style.width = '100%';
+  video.style.height = '100%';
+  video.style.position = 'absolute';
+  video.style.top = '0';
+  video.style.left = '0';
+  video.src = src;
+
+  apod.prepend(vidContainer);
+  vidContainer.appendChild(video);
+}
 
 /*
  * Sækir nýja Mynd af handahófi frá Nasa API og birtir hana á forsíðunni
@@ -24,32 +51,30 @@ function getNewImage() {
     return response.json();
   })
     .then((data) => {
-      if (document.contains(document.getElementById('vidElement'))) {
-        document.getElementById('vidElement').remove();
+      if (document.contains(document.getElementById('vid-container'))) {
+        document.getElementById('vid-container').remove();
       }
-
       const type = data.media_type;
       img = data.url;
       if (type === 'video') {
-        const apod = document.querySelector('.apod');
-        const video = document.createElement('iframe');
-        video.id = 'vidElement';
-        video.width = 560;
-        video.height = 315;
-        video.src = img;
-        apod.insertBefore(video, apod.firstChild);
+        document.querySelector('.apod__image').style.display = 'none';
+        displayVideo(img);
       } else {
         document.querySelector('.apod__image').src = img;
+        document.querySelector('.apod__image').style.display = 'block';
       }
+
       title = data.title;
       document.querySelector('.apod__title').innerHTML = title;
 
       text = data.explanation;
       document.querySelector('.apod__text').innerHTML = text;
 
-      image = { type: type, mediaUrl: img, text: text, title: title };
+      image = {
+        type, mediaUrl: img, text, title,
+      };
     });
-}//type, mediaUrl, text, title
+}
 
 /*
  * Vistar núverandi mynd í storage.
@@ -81,36 +106,33 @@ export function loadFavourites() {
   const images = load();
   const loc = document.getElementsByTagName('main');
 
-  images.forEach((image) => {
-    if (image.type === 'video') {
-    const component = el('section',
-      el('h2'),
-      el('iframe'),
-    );
-    component.className = 'apod';
-    component.firstChild.className = 'apod__title';
-    const title = component.querySelector('.apod__title');
-    title.innerHTML = image.title;
-    component.lastChild.className = 'apod__video';
-    const media = component.querySelector('.apod__video');
-    media.id = 'vidElement';
-    media.width = 560;
-    media.height = 315;
-    media.src = image.mediaUrl;
-    loc[0].appendChild(component);
+  images.forEach((element) => {
+    if (element.type === 'video') {
+      const component = el('section');
+      component.className = 'apod';
+      loc[0].appendChild(component);
+
+      const cardTitle = document.createElement('h2');
+      cardTitle.className = 'apod__title';
+      cardTitle.innerHTML = element.title;
+
+      displayVideo(element.mediaUrl);
+      component.insertBefore(cardTitle, component.firstChild);
     } else {
       const component = el('section',
-      el('h2'),
-      el('img'),
-    );
-    component.className = 'apod';
-    component.firstChild.className = 'apod__title';
-    const title = component.querySelector('.apod__title');
-    title.innerHTML = image.title;
-    component.lastChild.className = 'apod__image';
-    const media = component.querySelector('.apod__image');
-    media.src = image.mediaUrl;
-    loc[0].appendChild(component);
+        el('h2'),
+        el('img'));
+      component.className = 'apod';
+      component.firstChild.className = 'apod__title';
+
+      const cardTitle = component.querySelector('.apod__title');
+      cardTitle.innerHTML = element.title;
+      component.lastChild.className = 'apod__image';
+
+      const media = component.querySelector('.apod__image');
+      media.src = element.mediaUrl;
+
+      loc[0].appendChild(component);
     }
   });
 }

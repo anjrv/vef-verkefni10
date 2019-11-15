@@ -11,12 +11,11 @@ const URL = 'https://api.nasa.gov/planetary/apod';
 
 /**
  * Sækir mynd af handahófi frá APOD API hjá nasa
- *
  * @returns {Promise} sem mun innihalda upplýsingar um mynd/myndband hjá nasa.
  */
-export default async function getRandomImage() {
+export default async function getRandomImage() { /* eslint-disable-line */
   const date = randomDate();
-  try { // 2018-03-18 url date for a video value || ${date} for normal use
+  try { // 2018-03-18 url date for a video value
     const response = await fetch(`${URL}?api_key=${API_KEY}&date=${date}`);
     return response;
   } catch (err) {
