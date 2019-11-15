@@ -1,4 +1,5 @@
 import init, { loadFavourites } from './lib/display-media';
+import { clear } from './lib/storage';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
@@ -6,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isFavourites) {
     loadFavourites();
+    const clearItems = document.querySelector('#clear-button');
+    clearItems.addEventListener('click', clear);
   } else {
     const apod = document.querySelector('.apod');
     init(apod);

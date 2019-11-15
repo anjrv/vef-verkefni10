@@ -1,3 +1,4 @@
+import { empty } from './helpers';
 /**
  * Sækir og vistar í localStorage
  */
@@ -24,4 +25,6 @@ export function load() {
  */
 export function clear() {
   localStorage.removeItem(LOCALSTORAGE_KEY);
+  const loc = document.getElementsByTagName('main');
+  empty(loc[0]);
 }

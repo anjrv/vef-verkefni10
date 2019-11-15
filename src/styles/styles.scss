@@ -33,6 +33,11 @@ h1 { /* stylelint-disable-line */
 }
 
 // layout
+header { /* stylelint-disable-line */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 main { /* stylelint-disable-line */
   display: flex;
@@ -41,11 +46,6 @@ main { /* stylelint-disable-line */
   margin: 0 auto;
 
   flex-direction: column;
-}
-
-.game {
-  padding: $gutter;
-  flex: 2;
 }
 
 @import "text";

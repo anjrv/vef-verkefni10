@@ -106,33 +106,35 @@ export function loadFavourites() {
   const images = load();
   const loc = document.getElementsByTagName('main');
 
-  images.forEach((element) => {
-    if (element.type === 'video') {
-      const component = el('section');
-      component.className = 'apod';
-      loc[0].appendChild(component);
+  if (!(images === null || images.length === 0)) {
+    images.forEach((element) => {
+      if (element.type === 'video') {
+        const component = el('section');
+        component.className = 'apod';
+        loc[0].appendChild(component);
 
-      const cardTitle = document.createElement('h2');
-      cardTitle.className = 'apod__title';
-      cardTitle.innerHTML = element.title;
+        const cardTitle = document.createElement('h2');
+        cardTitle.className = 'apod__title';
+        cardTitle.innerHTML = element.title;
 
-      displayVideo(element.mediaUrl);
-      component.insertBefore(cardTitle, component.firstChild);
-    } else {
-      const component = el('section',
-        el('h2'),
-        el('img'));
-      component.className = 'apod';
-      component.firstChild.className = 'apod__title';
+        displayVideo(element.mediaUrl);
+        component.insertBefore(cardTitle, component.firstChild);
+      } else {
+        const component = el('section',
+          el('h2'),
+          el('img'));
+        component.className = 'apod';
+        component.firstChild.className = 'apod__title';
 
-      const cardTitle = component.querySelector('.apod__title');
-      cardTitle.innerHTML = element.title;
-      component.lastChild.className = 'apod__image';
+        const cardTitle = component.querySelector('.apod__title');
+        cardTitle.innerHTML = element.title;
+        component.lastChild.className = 'apod__image';
 
-      const media = component.querySelector('.apod__image');
-      media.src = element.mediaUrl;
+        const media = component.querySelector('.apod__image');
+        media.src = element.mediaUrl;
 
-      loc[0].appendChild(component);
-    }
-  });
+        loc[0].appendChild(component);
+      }
+    });
+  }
 }
