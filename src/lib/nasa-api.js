@@ -6,7 +6,7 @@ const API_KEY = 'XZ6RsleT66jvg29MIiDyJ3hwAeFui9XG5uiIVFW5';
 const URL = 'https://api.nasa.gov/planetary/apod';
 
 /**
- * Sækir mynd af handahófi frá APOD API hjá nasa
+ * Sækir mynd af handahófi frá APOD API hjá nasa.
  * @returns {Promise} sem mun innihalda upplýsingar um mynd/myndband hjá nasa.
  */
 export default async function getRandomImage() { /* eslint-disable-line */

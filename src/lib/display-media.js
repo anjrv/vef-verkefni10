@@ -40,7 +40,7 @@ function displayVideo(src) {
 
 /*
  * Sækir nýja Mynd af handahófi frá Nasa API og birtir hana á forsíðunni
- * ásamt titli og texta
+ * ásamt titli og texta.
  */
 function getNewImage() {
   const fetchPromise = getRandomImage();

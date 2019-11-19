@@ -1,8 +1,8 @@
 
 /**
- * Hreinsa börn úr elementi
+ * Hreinsa börn úr elementi.
  *
- * @param {object} element Element sem á að hreinsa börn úr
+ * @param {object} element Element sem á að hreinsa börn úr.
  */
 export function empty(element) {
   while (element.firstChild) {
@@ -11,7 +11,7 @@ export function empty(element) {
 }
 
 /**
- * Búa til element og aukalega setja börn ef send með
+ * Búa til element og aukalega setja börn ef send með.
  *
  * @param {string} name Nafn á element
  * @param  {...any} children Börn fyrir element
@@ -33,14 +33,14 @@ export function el(name, ...children) {
 }
 
 /**
-* Skilar tölu af handahófi á bilinu [min, max]
+* Skilar tölu af handahófi á bilinu [min, max].
 */
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
- * Skilar dagsetningu milli 16-6-1995 og núverandi af handahófi
+ * Skilar dagsetningu milli 16-6-1995 og núverandi af handahófi.
  */
 export function randomDate() {
   let month;
